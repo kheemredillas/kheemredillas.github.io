@@ -1,226 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Storage Management & Redundancy – Kheem Redillas</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storage Management and Redundancy</title>
 <style>
-/* 🌸 Base Styles */
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffeaf4, #e8f0ff);
-  color: #333;
-  overflow-x: hidden;
-}
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to bottom right, #ffe6f2, #fff0f5);
+    color: #4a004e;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
 
-/* 🌸 Header */
-header {
-  background: rgba(255, 240, 246, 0.9);
-  text-align: center;
-  padding: 2rem 1rem;
-  border-bottom: 2px solid #f7c9e3;
-}
+  header {
+    text-align: center;
+    padding: 40px 20px 20px;
+  }
 
-header h1 {
-  font-size: 2.3rem;
-  color: #b84b8f;
-  margin-bottom: 0.5rem;
-}
-header p {
-  color: #666;
-  font-weight: 500;
-}
+  header h1 {
+    font-size: 2.5rem;
+    color: #b30086;
+    margin-bottom: 10px;
+  }
 
-/* 🌸 Navigation Tabs */
-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 1.5rem 0;
-}
-nav a {
-  text-decoration: none;
-  color: #b84b8f;
-  background: #fff;
-  padding: 0.6rem 1rem;
-  border-radius: 25px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
-  font-weight: 600;
-}
-nav a:hover {
-  background: #f7c9e3;
-  transform: translateY(-3px);
-  color: #5a184d;
-}
+  header p {
+    font-size: 1.2rem;
+    color: #6a006a;
+  }
 
-/* 🌸 Slide Sections */
-section {
-  display: none;
-  padding: 2rem;
-  max-width: 900px;
-  margin: auto;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  animation: fadeIn 0.5s ease-in-out;
-}
+  nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+  }
 
-section.active {
-  display: block;
-}
+  nav button {
+    background: #ffb6c1;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    color: #4a004e;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(255, 192, 203, 0.6);
+  }
 
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(10px);}
-  to {opacity: 1; transform: translateY(0);}
-}
+  nav button:hover {
+    background: #ff69b4;
+    color: white;
+    transform: translateY(-3px);
+  }
 
-/* 🌸 Text Styles */
-h2 {
-  color: #b84b8f;
-}
-ul {
-  margin-left: 1.5rem;
-}
-blockquote {
-  font-style: italic;
-  color: #666;
-  background: #fef4fa;
-  border-left: 4px solid #f7c9e3;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-}
+  main {
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(255, 192, 203, 0.5);
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  color: #999;
-  font-size: 0.9rem;
-}
+  main.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h2 {
+    color: #b30086;
+  }
+
+  .content {
+    line-height: 1.6;
+    color: #333;
+    margin-top: 10px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
 </style>
 </head>
-
 <body>
+
 <header>
   <h1>Storage Management and Redundancy</h1>
-  <p>Presented by <strong>Kheem Redillas</strong></p>
+  <p> SYSTEM ADMINISTRATION & MAINTENANCE REPORT</p>
 </header>
 
-<!-- 🌸 Navigation -->
-<nav id="tabs">
-  <a href="#" data-tab="1">Intro</a>
-  <a href="#" data-tab="2">Storage Management</a>
-  <a href="#" data-tab="3">Redundancy</a>
-  <a href="#" data-tab="4">RAID Levels</a>
-  <a href="#" data-tab="5">LVM</a>
-  <a href="#" data-tab="6">NAS vs SAN</a>
-  <a href="#" data-tab="7">Analysis</a>
-  <a href="#" data-tab="8">Conclusion</a>
-  <a href="#" data-tab="9">References</a>
+<nav>
+  <button data-page="slide1">Title</button>
+  <button data-page="slide2">Introduction</button>
+  <button data-page="slide3">Storage Management</button>
+  <button data-page="slide4">Redundancy</button>
+  <button data-page="slide5">RAID Levels</button>
+  <button data-page="slide10">LVM</button>
+  <button data-page="slide11">NAS vs SAN</button>
+  <button data-page="slide12">Analysis</button>
+  <button data-page="slide13">Conclusion</button>
+  <button data-page="slide14">References</button>
 </nav>
 
-<!-- 🌸 Content Sections -->
-<main>
-  <section id="tab-1" class="active">
-    <h2>Slide 1 – Title</h2>
-    <p><strong>Course:</strong> [Insert Course Name]<br>
-       <strong>Reporter:</strong> Kheem Redillas<br>
-       <strong>Instructor:</strong> [Insert Instructor Name]<br>
-       <strong>Date:</strong> [Insert Date]</p>
-    <blockquote>“Data is the heart of every system — and storage keeps it alive.”</blockquote>
-  </section>
-
-  <section id="tab-2">
-    <h2>Introduction</h2>
-    <p><strong>Storage Management</strong> refers to the process of efficiently storing, organizing, and protecting digital data.</p>
-    <p><strong>Redundancy</strong> means creating backup or duplicate copies of data to ensure availability and reliability.</p>
-    <ul>
-      <li>Understand RAID levels and their functions.</li>
-      <li>Learn about Logical Volume Management (LVM).</li>
-      <li>Compare NAS and SAN storage systems.</li>
-    </ul>
-  </section>
-
-  <section id="tab-3">
-    <h2>What is Storage Management & Redundancy?</h2>
-    <p>Storage management ensures efficiency, reliability, and accessibility of stored data.</p>
-    <p>Redundancy prevents data loss during system failure through hardware or software duplication.</p>
-  </section>
-
-  <section id="tab-4">
-    <h2>RAID: Redundant Array of Independent Disks</h2>
-    <ul>
-      <li><strong>RAID 0:</strong> Speed, no redundancy.</li>
-      <li><strong>RAID 1:</strong> Mirroring for safety.</li>
-      <li><strong>RAID 5:</strong> Striping + Parity for balance.</li>
-      <li><strong>RAID 10:</strong> Mirroring + Striping for high performance and protection.</li>
-    </ul>
-  </section>
-
-  <section id="tab-5">
-    <h2>LVM (Logical Volume Management)</h2>
-    <p>Allows dynamic resizing of partitions with components like PV (Physical Volume), VG (Volume Group), and LV (Logical Volume).</p>
-    <p>Provides flexibility, scalability, and easier backups.</p>
-  </section>
-
-  <section id="tab-6">
-    <h2>NAS vs SAN</h2>
-    <table border="1" cellpadding="10" style="border-collapse: collapse; width:100%; text-align:center;">
-      <tr style="background:#f7c9e3;"><th>Feature</th><th>NAS</th><th>SAN</th></tr>
-      <tr><td>Type</td><td>File-level storage</td><td>Block-level storage</td></tr>
-      <tr><td>Access</td><td>Over local network (LAN)</td><td>Over high-speed network</td></tr>
-      <tr><td>Cost</td><td>Affordable</td><td>Expensive</td></tr>
-      <tr><td>Use Case</td><td>Home/small business</td><td>Enterprise data centers</td></tr>
-    </table>
-  </section>
-
-  <section id="tab-7">
-    <h2>Analysis / Implications</h2>
-    <ul>
-      <li>Improved data security and uptime.</li>
-      <li>Efficient data management and scalability.</li>
-      <li>Challenges: cost and complexity.</li>
-    </ul>
-    <p><strong>Conclusion:</strong> Balancing performance, reliability, and cost is key.</p>
-  </section>
-
-  <section id="tab-8">
-    <h2>Conclusion</h2>
-    <p>Storage management ensures data is organized, protected, and accessible. Redundancy safeguards against failures and data loss.</p>
-    <p>RAID, LVM, NAS, and SAN are key technologies in modern systems.</p>
-  </section>
-
-  <section id="tab-9">
-    <h2>References</h2>
-    <ul>
-      <li>Silberschatz, A., Galvin, P., & Gagne, G. (2020). Operating System Concepts. Wiley.</li>
-      <li>Red Hat, Inc. (2023). Logical Volume Management (LVM) Guide.</li>
-      <li>Synology. (2024). RAID Calculator and Storage Best Practices.</li>
-      <li>IBM Knowledge Center. (2023). Storage Management and Data Redundancy.</li>
-      <li>Cisco. (2023). NAS vs. SAN Storage Overview.</li>
-    </ul>
-  </section>
+<main id="contentBox" class="active">
+  <h2>Welcome 💖</h2>
+  <p class="content">
+    Click the buttons above to explore each topic about <b>Storage Management and Redundancy.</b><br>
+    Learn how data is stored, managed, and protected using modern storage technologies like RAID, LVM, NAS, and SAN.
+  </p>
 </main>
 
-<footer>
-  © 2025 Kheem Redillas — For academic presentation use.
-</footer>
+<footer>© 2025 | Presentation by Kheem Redillas</footer>
 
 <script>
-/* 🌸 Hover Tabs Interaction */
-const tabs = document.querySelectorAll('nav a');
-const sections = document.querySelectorAll('section');
+const slides = {
+  slide1: `
+    <h2>🖥️ Title Slide</h2>
+    <p class="content">
+      <b>Title:</b> Storage Management and Redundancy<br>
+      <b>Course:</b> Bachelor of Science in Information Technology <br>
+      <b>Reporter:</b> Kheem Redillas | John Martinez | Nicole Viray <br>
+      <b>Instructor:</b> Mr. Rodel Villarez <br>
+      <b>Date:</b> 2025-2026 <br><br>
+      “Data is the heart of every system — and storage keeps it alive.”
+    </p>
+  `,
+  slide2: `
+    <h2>💡 Introduction</h2>
+    <p class="content">
+      Storage Management refers to efficiently storing, organizing, and protecting digital data.<br><br>
+      Redundancy means creating backups or duplicate copies to ensure data availability.<br><br>
+      As data grows, managing storage systems becomes crucial.<br><br>
+      <b>Objectives:</b><br>
+      - Understand RAID levels.<br>
+      - Learn about Logical Volume Management (LVM).<br>
+      - Compare NAS and SAN systems.
+    </p>
+  `,
+  slide3: `
+    <h2>🧠 What is Storage Management?</h2>
+    <p class="content">
+      The administration of data storage systems to ensure efficiency, reliability, and accessibility.<br><br>
+      Involves monitoring, allocating, and backing up data resources.<br><br>
+      <b>Goals:</b><br>
+      - Optimize disk usage.<br>
+      - Maintain performance.<br>
+      - Protect data from loss or corruption.
+    </p>
+  `,
+  slide4: `
+    <h2>🧩 Understanding Redundancy</h2>
+    <p class="content">
+      Duplication of critical components or functions to increase reliability and availability.<br><br>
+      <b>Types:</b><br>
+      - Hardware redundancy (duplicate drives).<br>
+      - Software redundancy (backup tools).<br><br>
+      Ensures data integrity and business continuity.
+    </p>
+  `,
+  slide5: `
+    <h2>⚙️ RAID Levels Overview</h2>
+    <p class="content">
+      RAID combines multiple drives for better performance and reliability.<br><br>
+      Common types include RAID 0, 1, 5, and 10 — each offering unique benefits.<br><br>
+      RAID ensures data is both fast and safe, depending on configuration.
+    </p>
+  `,
+  slide10: `
+    <h2>🧱 LVM (Logical Volume Management)</h2>
+    <p class="content">
+      LVM allows dynamic disk management by combining physical volumes into logical ones.<br><br>
+      <b>Components:</b><br>
+      - PV: Physical Volume<br>
+      - VG: Volume Group<br>
+      - LV: Logical Volume<br><br>
+      Enables resizing, scalability, and easier backups.
+    </p>
+  `,
+  slide11: `
+    <h2>🌐 NAS vs SAN</h2>
+    <p class="content">
+      <b>NAS:</b> File-level storage, affordable, for small businesses.<br>
+      <b>SAN:</b> Block-level storage, high speed, for enterprises.<br><br>
+      NAS is like shared folders on Wi-Fi, while SAN is a dedicated network for fast access.
+    </p>
+  `,
+  slide12: `
+    <h2>🔍 Analysis / Implications</h2>
+    <p class="content">
+      <b>Positive Impacts:</b><br>
+      - Improved data security and uptime.<br>
+      - Efficient management and scalability.<br><br>
+      <b>Challenges:</b><br>
+      - High setup and maintenance costs.<br><br>
+      <b>Conclusion:</b> Balance reliability, performance, and cost.
+    </p>
+  `,
+  slide13: `
+    <h2>🧾 Conclusion</h2>
+    <p class="content">
+      Storage management ensures data is organized, protected, and accessible.<br><br>
+      Redundancy safeguards against failures.<br><br>
+      RAID, LVM, NAS, and SAN — key modern storage technologies.<br><br>
+      Effective data management = reliability + performance + security.
+    </p>
+  `,
+  slide14: `
+    <h2>📚 References</h2>
+    <p class="content">
+      Silberschatz, A., Galvin, P., & Gagne, G. (2020). <i>Operating System Concepts.</i> Wiley.<br>
+      Red Hat, Inc. (2023). <i>Logical Volume Management (LVM) Guide.</i><br>
+      Synology. (2024). <i>RAID Calculator and Best Practices.</i><br>
+      IBM Knowledge Center. (2023). <i>Storage Management and Data Redundancy.</i><br>
+      Cisco. (2023). <i>NAS vs. SAN Overview.</i>
+    </p>
+  `
+};
 
-tabs.forEach(tab => {
-  tab.addEventListener('mouseover', () => {
-    const id = tab.getAttribute('data-tab');
-    sections.forEach(sec => sec.classList.remove('active'));
-    document.querySelector(#tab-${id}).classList.add('active');
+// Script to handle tab clicks
+const contentBox = document.getElementById('contentBox');
+const buttons = document.querySelectorAll('nav button');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const page = button.getAttribute('data-page');
+    contentBox.classList.remove('active');
+    setTimeout(() => {
+      contentBox.innerHTML = slides[page];
+      contentBox.classList.add('active');
+    }, 300);
   });
 });
 </script>
+
 </body>
 </html>
